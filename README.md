@@ -3,7 +3,7 @@
 Use poetry
 
 ```bash
-poetry.lock
+poetry install
 ```
 
 
