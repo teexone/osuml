@@ -6,6 +6,6 @@ HitObject = NamedTuple("HitObject",
                         time=int, 
                         type=int, 
                         hit_sound=int, 
-#                      "obj_params",        skipped since not used 
-#                      "hit_sample"         skipped since not used
+                     # "obj_params",        skipped since not used
+                     # "hit_sample"         skipped since not used
 )

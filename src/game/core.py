@@ -1,13 +1,14 @@
-
 from enum import Enum
 from src.osumap.OsuMap import OsuMap
 
 import numpy as np
 
+
 class Action(Enum):
     KEY1 = -1,
     KEY2 = 1,
     STILL = 0
+
 
 class TaikoState:
     def __init__(self) -> None:
@@ -34,8 +35,10 @@ class TaikoState:
                 r = m
             else:
                 l = m
-        return self.hit_objects[r:(right+1)]
-    
+        return self.hit_objects[r:(right + 1)]
+
+    def last(self):
+        return self.hit_objects[:-1]
 
 class Taiko:
     def __init__(self) -> None:
@@ -45,12 +48,5 @@ class Taiko:
         self.state = TaikoState()
         self.state.hit_objects = sorted(osu.data, key=lambda x: x.time)
 
-
     def next(self, action: Action, time: np.uint16):
         self.t = time
-        
-
-        
-    
-
-    

@@ -1,11 +1,11 @@
 import re
-from src.osumap.HitObject import HitObject 
+from src.osumap.HitObject import HitObject
+
 
 class OsuMap:
-
     INTEGER = r"\d+"
-    COMMA_SEPARATED_LIST = r"\w(?:,\w)*"
-    COLON_SEPERATED_LIST = r"\w(?:\:\w)*"
+    COMMA_SEPARATED_LIST = r"\w+(?:,\w+)*"
+    COLON_SEPERATED_LIST = r"\w+(?:\:\w+)*"
 
     SECTIONS = re.compile(r"\[(?P<SECTION_NAME>\w+)\]\s(?P<SECTION_CONTENT>[^\[]+)")
     HIT_OBJECT = re.compile(f"(?P<x>{INTEGER}),"
@@ -14,13 +14,12 @@ class OsuMap:
                             f"(?P<type>{INTEGER}),"
                             f"(?P<hit_sound>{INTEGER}),"
                             f"(?:(?P<obj_params>{COMMA_SEPARATED_LIST}),)?"
-                            f"(?P<hit_sample>{COLON_SEPERATED_LIST})\:") 
-
-    
+                            f"(?P<hit_sample>{COLON_SEPERATED_LIST})\:")
 
     def __init__(self, inputs) -> None:
         if isinstance(inputs, str):
             self.data = self._parse(inputs)
+            print(self.data[-1])
         pass
 
     def _parse(self, text):
@@ -30,9 +29,4 @@ class OsuMap:
             if section_name == "HitObjects":
                 hit_objects.extend(re.findall(OsuMap.HIT_OBJECT, section_content))
         return list(map(lambda args: HitObject(*args), hit_objects))
-        
-
-
-
-        
 
